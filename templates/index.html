@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>VillageFinder — Cambodia Gazetteer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="bg-orb orb1"></div><div class="bg-orb orb2"></div>
+<header class="topbar">
+  <div class="brand"><div class="brand-icon">⌖</div><div><strong>VillageFinder</strong><span>Cambodia Gazetteer</span></div></div>
+  <div class="source-pill">NCDD • 25 Provinces / Capitals</div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="eyebrow">NCDD ADMINISTRATIVE DATABASE</div>
+    <h1>Find any Cambodian village<br><span>in seconds.</span></h1>
+    <p>Search by village name, commune, district, province, or administrative code. Results include the complete Khmer administrative address.</p>
+    <div class="search-card">
+      <div class="search-row">
+        <div class="search-input-wrap">
+          <span class="search-icon">⌕</span>
+          <input id="query" autocomplete="off" placeholder="Search village in Khmer or English…" autofocus>
+          <button id="clearBtn" class="clear hidden">×</button>
+        </div>
+        <select id="province"><option value="">All provinces</option>{% for en, kh in provinces %}<option value="{{ en }}">{{ en }} — {{ kh }}</option>{% endfor %}</select>
+        <button id="searchBtn" class="search-btn">Search</button>
+      </div>
+      <div class="hint">Tip: try <b>Banteay Neang</b>, <b>បន្ទាយនាង</b>, or an NCDD code.</div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div><span class="stat-icon">⌂</span><div><b>{{ "{:,}".format(total) }}</b><small>villages indexed</small></div></div>
+    <div><span class="stat-icon">◎</span><div><b id="provinceCount">25</b><small>provinces / capitals</small></div></div>
+    <div><span class="stat-icon">▦</span><div><b id="districtCount">—</b><small>districts</small></div></div>
+    <div><span class="stat-icon">◇</span><div><b id="communeCount">—</b><small>communes / sangkats</small></div></div>
+  </section>
+
+  <section class="results-section">
+    <div class="results-head"><div><h2 id="resultTitle">Search results</h2><span id="resultMeta">Enter a village name above to begin.</span></div><button id="copyAll" class="ghost hidden">Copy addresses</button></div>
+    <div id="results" class="results">
+      <div class="empty"><div class="empty-icon">⌕</div><h3>Ready to search</h3><p>Enter a Khmer or English village name and press Search.</p></div>
+    </div>
+  </section>
+</main>
+
+<footer>Built from the uploaded NCDD gazetteer dataset • VillageFinder</footer>
+<script src="/static/app.js"></script>
+</body>
+</html>
